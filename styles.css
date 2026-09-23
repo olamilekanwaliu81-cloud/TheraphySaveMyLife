@@ -453,7 +453,7 @@ p { margin: 0 0 1rem; }
 .showcase__grid { display: grid; grid-template-columns: 1fr; gap: clamp(2rem, 5vw, 3.5rem); align-items: center; }
 @media (min-width: 900px) { .showcase__grid { grid-template-columns: 0.9fr 1.1fr; } }
 .showcase__art { position: relative; display: grid; place-items: center; }
-.showcase__art img { width: min(76%, 330px); filter: drop-shadow(0 44px 60px rgba(22,77,76,0.42)); }
+.showcase__art img { width: min(100%, 520px); filter: drop-shadow(0 30px 46px rgba(22,77,76,0.34)); }
 .showcase__art .cover-fallback { margin: 0 auto; }
 
 .pricecards { display: grid; grid-template-columns: 1fr; gap: 0.8rem; margin: 1.5rem 0 1.2rem; }
