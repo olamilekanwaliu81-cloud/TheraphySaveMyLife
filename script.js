@@ -5,6 +5,17 @@
   "use strict";
 
   /* -----------------------------------------------------
+     0) Meta Pixel helper — safe no-op if fbq isn't loaded
+        (blocked, offline, or consent not given).
+     ----------------------------------------------------- */
+  function fbTrack(event, params) {
+    try {
+      if (typeof window.fbq === "function") { window.fbq("track", event, params || {}); }
+    } catch (e) {}
+  }
+  var AMAZON_PRICE = { kindle: 2.99, paperback: 16.99, audiobook: 6.99 };
+
+  /* -----------------------------------------------------
      1) AMAZON LINK — set once, applied everywhere.
      Replace the value below with the final Amazon URL(s).
      If you have separate links per format, fill in the map
@@ -29,6 +40,19 @@
     }
     el.setAttribute("target", "_blank");
     el.setAttribute("rel", "noopener");
+
+    // Meta Pixel: outbound click to Amazon = intent to buy.
+    el.addEventListener("click", function () {
+      var f = el.getAttribute("data-fmt");
+      var params = {
+        content_name: "Therapy Changed My Suicidal Thoughts to Self-Love",
+        content_type: "product",
+        currency: "USD"
+      };
+      if (f) { params.content_ids = [f]; params.contents = [{ id: f, quantity: 1 }]; }
+      if (f && AMAZON_PRICE[f]) { params.value = AMAZON_PRICE[f]; }
+      fbTrack("InitiateCheckout", params);
+    });
   });
 
   /* -----------------------------------------------------
@@ -91,6 +115,7 @@
           success.focus();
         }
         markSubscribed();
+        fbTrack("Lead", { content_name: "Free Therapist-Finding Guide", currency: "USD", value: 0 });
         if (typeof onSuccess === "function") onSuccess();
       }
 
