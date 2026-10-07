@@ -107,29 +107,31 @@
         return;
       }
 
-      function showSuccess() {
-        form.classList.add("hide");
-        if (success) {
-          success.classList.add("show");
-          success.setAttribute("tabindex", "-1");
-          success.focus();
-        }
+      // Hand the visitor off to the dedicated thank-you page. The Lead
+      // conversion (Meta Pixel) fires there, so it's counted exactly once.
+      function goThankYou() {
         markSubscribed();
-        fbTrack("Lead", { content_name: "Free Therapist-Finding Guide", currency: "USD", value: 0 });
-        if (typeof onSuccess === "function") onSuccess();
+        window.location.href = "thank-you.html";
       }
 
       var action = form.getAttribute("action") || "";
       var isPlaceholder = (!action || action.indexOf("BREVO_FORM_ACTION_URL") === 0 || action === "FORM_ACTION_URL");
 
       if (isPlaceholder) {
-        // No real endpoint wired — demo the success state in-page.
+        // No real endpoint wired — go straight to the thank-you page.
         e.preventDefault();
-        showSuccess();
+        goThankYou();
         return;
       }
-      // Real Brevo endpoint: form posts into the hidden iframe, visitor stays here.
-      setTimeout(showSuccess, 350);
+
+      // Real Brevo endpoint: let the form POST into the hidden iframe so the
+      // subscriber is saved, then redirect once Brevo has responded (iframe
+      // "load"). The timeout is a fallback in case that event doesn't fire.
+      var iframe = document.querySelector('iframe[name="brevo_target"]');
+      var handed = false;
+      function handoff() { if (handed) return; handed = true; goThankYou(); }
+      if (iframe) { iframe.addEventListener("load", handoff, { once: true }); }
+      setTimeout(handoff, 2000);
     });
   }
 
