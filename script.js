@@ -111,7 +111,7 @@
       // conversion (Meta Pixel) fires there, so it's counted exactly once.
       function goThankYou() {
         markSubscribed();
-        window.location.href = "thank-you.html";
+        window.location.href = "/thank-you";
       }
 
       var action = form.getAttribute("action") || "";
