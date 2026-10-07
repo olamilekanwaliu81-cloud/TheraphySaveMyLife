@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
 
-<link rel="stylesheet" href="styles.css?v=19" />
+<link rel="stylesheet" href="styles.css?v=20" />
 
 <!-- Structured data -->
 <script type="application/ld+json">
@@ -532,15 +532,8 @@ src="https://www.facebook.com/tr?id=1813521393015042&ev=PageView&noscript=1"
           <button type="submit" class="btn btn-gold btn-lg btn-block">Get the Free Guide</button>
           <p class="fineprint">It's completely free. We'll email your guide and occasional updates from Paula. Unsubscribe anytime. <a href="/privacy">Privacy</a>.</p>
         </form>
-        <!-- Hidden target keeps the visitor on this page after submit -->
+        <!-- Hidden target receives the Brevo POST; the visitor is then sent to /thank-you -->
         <iframe name="brevo_target" title="Brevo signup" style="display:none" aria-hidden="true"></iframe>
-
-        <!-- Success message (shown after submit) -->
-        <div class="form-success" id="form-success" role="status" aria-live="polite">
-          <div class="checkwrap"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
-          <h3>Check your inbox 💛</h3>
-          <p>Your free guide is on its way. If you don't see it in a few minutes, please check your spam or promotions folder.</p>
-        </div>
       </div>
     </div>
   </div>
@@ -763,18 +756,12 @@ src="https://www.facebook.com/tr?id=1813521393015042&ev=PageView&noscript=1"
           <p class="fineprint">It's completely free. Unsubscribe anytime. <a href="/privacy">Privacy</a>.</p>
         </form>
 
-        <div class="form-success" id="exit-success" role="status" aria-live="polite">
-          <div class="checkwrap"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
-          <h3>Check your inbox 💛</h3>
-          <p>Your free guide is on its way. You can close this window.</p>
-        </div>
-
         <button type="button" class="modal__decline" data-close>No thanks, maybe later</button>
       </div>
     </div>
   </div>
 </div>
 
-<script src="script.js?v=20"></script>
+<script src="script.js?v=21"></script>
 </body>
 </html>

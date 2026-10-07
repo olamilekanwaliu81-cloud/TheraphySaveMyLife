@@ -83,8 +83,8 @@
   }
 
   // Wire any opt-in form (main page or exit popup). Both post to Brevo
-  // via target="brevo_target" and share this validation + success logic.
-  function wireOptin(form, success, onSuccess) {
+  // via target="brevo_target", then redirect the visitor to /thank-you.
+  function wireOptin(form) {
     if (!form) return;
     var fname = form.querySelector('input[name="FIRSTNAME"]');
     var email = form.querySelector('input[name="EMAIL"]');
@@ -135,7 +135,7 @@
     });
   }
 
-  wireOptin(document.getElementById("optin-form"), document.getElementById("form-success"));
+  wireOptin(document.getElementById("optin-form"));
 
   /* -----------------------------------------------------
      4) Reveal-on-scroll (respects reduced motion)
@@ -248,10 +248,8 @@
       if (e.target.hasAttribute("data-close")) closeModal();
     });
 
-    // wire the popup form to Brevo (closes the modal shortly after success)
-    wireOptin(document.getElementById("exit-form"), document.getElementById("exit-success"), function () {
-      window.setTimeout(closeModal, 2600);
-    });
+    // wire the popup form to Brevo (redirects to /thank-you on success)
+    wireOptin(document.getElementById("exit-form"));
 
     // arm triggers a few seconds after load (avoid firing instantly)
     window.setTimeout(function () { armed = true; }, 4000);

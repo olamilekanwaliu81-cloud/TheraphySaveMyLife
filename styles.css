@@ -537,14 +537,6 @@ p { margin: 0 0 1rem; }
 .optin .error.show { display: block; }
 .optin .fineprint { font-size: 0.8rem; color: #bfdcd7; margin: 0.6rem 0 0; }
 .optin .fineprint a { color: #fff; text-decoration: underline; }
-.form-success {
-  display: none; background: rgba(255,255,255,0.12); border: 1px solid var(--gold-soft);
-  border-radius: var(--radius); padding: 1.7rem; text-align: center;
-}
-.form-success.show { display: block; }
-.form-success h3 { color: #fff; }
-.form-success p { color: #eaf5f2; margin: 0; }
-.form-success .checkwrap { width: 56px; height: 56px; margin: 0 auto 0.8rem; border-radius: 50%; background: linear-gradient(180deg, #d4a944, var(--gold)); display: grid; place-content: center; color: #fff; }
 
 /* ---------- Bridge ---------- */
 .bridge { background: var(--paper); }
