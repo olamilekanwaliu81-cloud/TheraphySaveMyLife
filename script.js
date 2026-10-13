@@ -265,4 +265,30 @@
       window.setTimeout(function () { openModal(); }, 30000);
     }
   }
+
+  /* -----------------------------------------------------
+     8) Trailer — click-to-play facade.
+        The video only downloads once the visitor clicks play.
+     ----------------------------------------------------- */
+  var vframe = document.querySelector(".videoframe[data-video]");
+  if (vframe) {
+    var playBtn = vframe.querySelector(".videoframe__play");
+    if (playBtn) {
+      playBtn.addEventListener("click", function () {
+        var video = document.createElement("video");
+        video.src = vframe.getAttribute("data-video");
+        video.controls = true;
+        video.autoplay = true;
+        video.playsInline = true;
+        video.setAttribute("playsinline", "");
+        video.preload = "auto";
+        vframe.insertBefore(video, vframe.firstChild);
+        vframe.classList.add("is-playing");
+        var p = video.play();
+        if (p && p.catch) { p.catch(function () {}); }
+        // Meta Pixel: count trailer plays as engagement.
+        try { if (typeof window.fbq === "function") { window.fbq("trackCustom", "PlayTrailer"); } } catch (e) {}
+      });
+    }
+  }
 })();
