@@ -107,10 +107,16 @@
         return;
       }
 
-      // Hand the visitor off to the dedicated thank-you page. The Lead
-      // conversion (Meta Pixel) fires there, so it's counted exactly once.
+      // On a successful submit: fire the Meta Pixel Lead conversion right here
+      // (counted once, at the moment they submit), then hand the visitor off
+      // to the dedicated thank-you page.
       function goThankYou() {
         markSubscribed();
+        try {
+          if (typeof window.fbq === "function") {
+            window.fbq("track", "Lead", { content_name: "Free Therapist-Finding Guide", currency: "USD", value: 0 });
+          }
+        } catch (e) {}
         window.location.href = "/thank-you";
       }
 

@@ -24,8 +24,8 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '1813521393015042');
 fbq('track', 'PageView');
-// Conversion: a visitor completed the free-guide signup and landed here.
-fbq('track', 'Lead', {content_name: 'Free Therapist-Finding Guide', currency: 'USD', value: 0});
+// Note: the Lead conversion fires at form-submit time (see script.js),
+// so it is intentionally NOT tracked again here, to avoid double-counting.
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1813521393015042&ev=PageView&noscript=1"
